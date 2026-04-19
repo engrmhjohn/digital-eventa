@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Digital Inventa – AI Agents, Automation & Web Solutions</title>
+    <!-- Tailwind + Inter + Lucide -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    <style>
+        * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #e2e8f0; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 10px; }
+
+        .rv { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1); }
+        .rv.on { opacity: 1; transform: translateY(0); }
+        .rvd { transition-delay: 0.12s; }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes floatWhatsApp { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
+        
+        .afade { animation: fadeUp 0.6s ease forwards; opacity: 0; }
+        .glass-nav { background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(203,213,225,0.5); transition: all 0.25s ease; }
+        .nav-scrolled { background: rgba(255,255,255,0.98); box-shadow: 0 4px 20px rgba(0,0,0,0.02); border-bottom-color: #e2e8f0; }
+        
+        .nav-link { font-size: 0.9rem; font-weight: 600; color: #1e293b; transition: 0.2s; letter-spacing: -0.01em; padding: 0.5rem 0; white-space: nowrap; }
+        .nav-link:hover { color: #4f46e5; }
+        .brand-logo { height: 48px; width: auto; object-fit: contain; display: block; }
+        .brand-logo-mobile { height: 38px; width: auto; object-fit: contain; display: block; }
+        .nav-cta { position: relative; display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.35rem 0.4rem 0.35rem 1rem; border-radius: 999px; background: linear-gradient(135deg, #0f172a, #4338ca); color: #fff; font-size: 0.85rem; font-weight: 700; letter-spacing: -0.01em; box-shadow: 0 14px 30px rgba(67,56,202,0.22); border: 1px solid rgba(99,102,241,0.25); transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease; overflow: hidden; }
+        .nav-cta::before { content: ""; position: absolute; inset: 1px; border-radius: 999px; background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0)); pointer-events: none; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 18px 36px rgba(67,56,202,0.28); filter: saturate(1.08); }
+        .nav-cta-text,
+        .nav-cta-icon { position: relative; z-index: 1; }
+        .nav-cta-icon { width: 2rem; height: 2rem; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.16); backdrop-filter: blur(8px); }
+        
+        .mega-menu { opacity: 0; visibility: hidden; transform: translate(-50%, 8px); transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease; position: absolute; top: calc(100% + 18px); left: 50%; width: min(900px, calc(100vw - 3rem)); background: white; border-radius: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; z-index: 100; }
+        .group:hover .mega-menu { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+        .mega-menu-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem; padding: 1.5rem; }
+        .mega-menu-grid.two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .mega-menu-section { padding: 0 0.5rem; }
+        .mega-menu-section + .mega-menu-section { border-left: 1px solid #e2e8f0; }
+        .menu-section-title { font-size: 0.8rem; font-weight: 800; letter-spacing: 0.03em; color: #0f172a; margin-bottom: 0.85rem; padding-bottom: 0.65rem; border-bottom: 2px solid #c7d2fe; }
+        .menu-sub-link { display: block; font-size: 0.85rem; color: #475569; padding: 0.7rem 0; transition: color 0.2s ease, background-color 0.2s ease, padding-left 0.2s ease; cursor: pointer; border-bottom: 1px dotted #cbd5e1; }
+        .menu-sub-link:hover { color: #4f46e5; padding-left: 0.4rem; background: rgba(238, 242, 255, 0.65); }
+        .menu-sub-link:last-child { border-bottom: none; }
+        @media (max-width: 1279px) {
+            .mega-menu { width: min(760px, calc(100vw - 2rem)); }
+            .mega-menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .mega-menu-grid.two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        
+        .gradient-text-hero { background: linear-gradient(125deg, #4f46e5, #a855f7, #10b981, #3b82f6); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; }
+        
+        .mobile-menu { position: fixed; top: 70px; right: 1rem; left: 1rem; bottom: 1rem; z-index: 60; background: rgba(255,255,255,0.98); backdrop-filter: blur(18px); border: 1px solid rgba(226,232,240,0.95); border-radius: 1.5rem; box-shadow: 0 20px 45px rgba(15,23,42,0.12); transform: translateY(-12px); opacity: 0; visibility: hidden; pointer-events: none; transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease; overflow-y: auto; }
+        .mobile-menu.open { transform: translateY(0); opacity: 1; visibility: visible; pointer-events: auto; }
+        .mobile-menu-panel { min-height: 100%; display: flex; flex-direction: column; }
+        .mobile-nav-link { display: block; font-size: 1rem; font-weight: 700; color: #334155; padding: 0.95rem 0; border-bottom: 1px solid #e2e8f0; }
+        .mobile-menu details { border-bottom: 1px solid #e2e8f0; }
+        .mobile-menu summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: 1rem; font-weight: 700; color: #0f172a; padding: 1rem 0; cursor: pointer; }
+        .mobile-menu summary::-webkit-details-marker { display: none; }
+        .mobile-menu summary::after { content: "+"; font-size: 1.2rem; color: #6366f1; transition: transform 0.2s ease; }
+        .mobile-menu details[open] summary::after { transform: rotate(45deg); }
+        .mobile-menu-group { padding: 0 0 1rem; }
+        .mobile-menu-title { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #4f46e5; padding: 0.9rem 0 0.55rem; border-bottom: 2px solid #c7d2fe; margin-bottom: 0.45rem; }
+        .mobile-sub-link { display: block; color: #475569; font-size: 0.92rem; padding: 0.75rem 0.25rem; border-bottom: 1px dotted #cbd5e1; }
+        .mobile-sub-link:last-child { border-bottom: none; }
+        .menu-toggle-icon { position: relative; width: 24px; height: 18px; display: inline-flex; flex-direction: column; justify-content: space-between; align-items: flex-start; }
+        .menu-toggle-icon span { display: block; flex: 0 0 2px; height: 2px; border-radius: 999px; background: #1e293b; transition: transform 0.25s ease, opacity 0.25s ease, width 0.25s ease; }
+        .menu-toggle-icon span:nth-child(1) { width: 24px; }
+        .menu-toggle-icon span:nth-child(2) { width: 12px; }
+        .menu-toggle-icon span:nth-child(3) { width: 18px; }
+        #menuToggle.active .menu-toggle-icon span:nth-child(1) { width: 22px; transform: translateY(7.5px) rotate(45deg); }
+        #menuToggle.active .menu-toggle-icon span:nth-child(2) { opacity: 0; }
+        #menuToggle.active .menu-toggle-icon span:nth-child(3) { width: 22px; transform: translateY(-7.5px) rotate(-45deg); }
+        @media (max-width: 640px) {
+            .mobile-menu { right: 0.75rem; left: 0.75rem; bottom: 0.75rem; }
+        }
+        
+        .stat-number { font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
+        .hero-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 58rem; margin: 0 auto; padding-top: 2rem; }
+        .hero-stat-card { position: relative; overflow: hidden; text-align: left; padding: 1.25rem 1.25rem 1.15rem; border-radius: 1.5rem; background: rgba(255,255,255,0.78); border: 1px solid rgba(226,232,240,0.85); box-shadow: 0 18px 40px rgba(15,23,42,0.08); backdrop-filter: blur(10px); }
+        .hero-stat-card::before { content: ""; position: absolute; inset: 0 auto auto 0; width: 100%; height: 3px; background: linear-gradient(90deg, #4f46e5, #10b981, #3b82f6); opacity: 0.95; }
+        .hero-stat-value { display: flex; align-items: center; gap: 0.45rem; font-size: 2.35rem; line-height: 1; font-weight: 900; color: #0f172a; letter-spacing: -0.04em; margin-bottom: 0.45rem; }
+        .hero-stat-label { display: block; font-size: 0.82rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; }
+        .hero-stat-accent { width: 2.5rem; height: 2.5rem; border-radius: 0.95rem; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 0.85rem; }
+        .hero-stat-accent.indigo { background: rgba(79,70,229,0.12); color: #4f46e5; }
+        .hero-stat-accent.emerald { background: rgba(16,185,129,0.12); color: #10b981; }
+        .hero-stat-accent.amber { background: rgba(245,158,11,0.14); color: #f59e0b; }
+        .hero-stat-accent.sky { background: rgba(14,165,233,0.12); color: #0ea5e9; }
+        @media (min-width: 768px) {
+            .hero-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem; }
+        }
+        @media (max-width: 640px) {
+            .hero-stat-card { padding: 1.05rem; }
+            .hero-stat-value { font-size: 1.95rem; }
+            .hero-stat-label { font-size: 0.74rem; }
+        }
+        .social-fab { position: fixed; right: 24px; bottom: 24px; z-index: 99; display: flex; align-items: flex-end; justify-content: flex-end; padding: 0.25rem; }
+        .social-toggle { width: 60px; height: 60px; border: none; border-radius: 999px; background: linear-gradient(135deg, #4f46e5, #0ea5e9); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 30px rgba(79,70,229,0.28); cursor: pointer; transition: transform 0.25s ease, box-shadow 0.25s ease; animation: floatWhatsApp 3s ease-in-out infinite; }
+        .social-toggle:hover { transform: scale(1.06); box-shadow: 0 16px 34px rgba(79,70,229,0.34); }
+        .social-toggle .social-close { display: none; }
+        .social-fab.open .social-toggle .social-open { display: none; }
+        .social-fab.open .social-toggle .social-close { display: block; }
+        .social-links { position: absolute; right: 0.25rem; bottom: calc(100% + 0.75rem); display: flex; flex-direction: column-reverse; align-items: center; gap: 0.7rem; opacity: 0; transform: translateY(12px) scale(0.94); transform-origin: bottom center; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease; }
+        .social-fab.open .social-links { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+        .social-link { width: 48px; height: 48px; border-radius: 999px; display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 10px 24px rgba(15,23,42,0.18); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .social-link:hover { transform: scale(1.08); box-shadow: 0 14px 28px rgba(15,23,42,0.22); }
+        .social-link.whatsapp { background: #25D366; }
+        .social-link.facebook { background: #1877F2; }
+        .social-link.youtube { background: #FF0000; }
+        .social-link.instagram { background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af); }
+        @media (max-width: 640px) {
+            .social-fab { right: 12px; bottom: 12px; }
+            .social-toggle { width: 54px; height: 54px; }
+            .social-link { width: 44px; height: 44px; }
+        }
+        
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } }
+        
+        .service-card { background: white; border-radius: 1.5rem; padding: 1.5rem; transition: all 0.3s ease; border: 1px solid #e2e8f0; height: 100%; }
+        .service-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -12px rgba(0,0,0,0.1); border-color: #c7d2fe; }
+        
+        .partners-marquee { position: relative; overflow: hidden; }
+        .partners-marquee::before,
+        .partners-marquee::after { content: ""; position: absolute; top: 0; bottom: 0; width: 72px; z-index: 1; pointer-events: none; }
+        .partners-marquee::before { left: 0; background: linear-gradient(to right, #ffffff, rgba(255,255,255,0)); }
+        .partners-marquee::after { right: 0; background: linear-gradient(to left, #ffffff, rgba(255,255,255,0)); }
+        .partners-track { display: flex; width: max-content; animation: partners-scroll 30s linear infinite; }
+        .partners-marquee:hover .partners-track { animation-play-state: paused; }
+        .partner-slide { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 180px; padding: 0 1.5rem; }
+        .partner-logo { max-height: 52px; width: auto; max-width: 100%; object-fit: contain; opacity: 1; transition: transform 0.3s ease; }
+        .partner-logo:hover { transform: scale(1.08); }
+        @keyframes partners-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @media (max-width: 768px) {
+            .partners-marquee::before,
+            .partners-marquee::after { width: 36px; }
+            .partners-track { animation-duration: 24s; }
+            .partner-slide { width: 140px; padding: 0 1rem; }
+            .partner-logo { max-height: 40px; }
+        }
+        
+        .ai-feature-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
+        .ai-feature-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+<!-- Social Floating Toggle -->
+<div id="socialFab" class="social-fab">
+    <div class="social-links">
+        <a href="https://wa.me/8801234567890?text=Hello!%20I%27m%20interested%20in%20your%20digital%20marketing%20solutions." target="_blank" class="social-link whatsapp" aria-label="Chat on WhatsApp"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+        <a href="#" class="social-link facebook" aria-label="Visit Facebook">
+            <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" aria-hidden="true"><path d="M13.5 21v-7h2.3l.4-3h-2.7V9.1c0-.9.3-1.6 1.6-1.6H16V4.8c-.3 0-.9-.1-1.8-.1-2.5 0-4.1 1.5-4.1 4.3V11H7.5v3h2.6v7h3.4Z"/></svg>
+        </a>
+        <a href="#" class="social-link youtube" aria-label="Visit YouTube">
+            <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" aria-hidden="true"><path d="M21.6 7.2a2.9 2.9 0 0 0-2-2C17.8 4.7 12 4.7 12 4.7s-5.8 0-7.6.5a2.9 2.9 0 0 0-2 2C2 9 2 12 2 12s0 3 .4 4.8a2.9 2.9 0 0 0 2 2c1.8.5 7.6.5 7.6.5s5.8 0 7.6-.5a2.9 2.9 0 0 0 2-2C22 15 22 12 22 12s0-3-.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z"/></svg>
+        </a>
+        <a href="#" class="social-link instagram" aria-label="Visit Instagram">
+            <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" aria-hidden="true"><path d="M7.8 3h8.4A4.8 4.8 0 0 1 21 7.8v8.4a4.8 4.8 0 0 1-4.8 4.8H7.8A4.8 4.8 0 0 1 3 16.2V7.8A4.8 4.8 0 0 1 7.8 3Zm0 1.8A3 3 0 0 0 4.8 7.8v8.4a3 3 0 0 0 3 3h8.4a3 3 0 0 0 3-3V7.8a3 3 0 0 0-3-3H7.8Zm8.9 1.3a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7.6A4.4 4.4 0 1 1 7.6 12 4.4 4.4 0 0 1 12 7.6Zm0 1.8A2.6 2.6 0 1 0 14.6 12 2.6 2.6 0 0 0 12 9.4Z"/></svg>
+        </a>
+    </div>
+    <button id="socialToggle" class="social-toggle" type="button" aria-label="Open social links" aria-expanded="false">
+        <i data-lucide="messages-square" class="social-open w-6 h-6"></i>
+        <i data-lucide="x" class="social-close w-6 h-6"></i>
+    </button>
+</div>
+
+<!-- ========== NAVIGATION ========== -->
+<nav id="navbar" class="sticky top-0 z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 md:px-8 h-[70px] flex items-center justify-between">
+        <a href="#home" class="flex items-center gap-3 group" aria-label="Digital Inventa Home">
+            <img src="logo.png" alt="Digital Inventa" class="brand-logo">
+            <!-- Digital Inventa Logo with custom SVG/text -->
+            <div class="hidden w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-500 items-center justify-center shadow-md shadow-indigo-500/25">
+                <span class="text-white font-bold text-xl">DI</span>
+            </div>
+            <div class="hidden flex-col leading-tight">
+                <span class="text-[1.25rem] font-extrabold tracking-tight text-slate-800">Digital Inventa</span>
+                <span class="text-[0.65rem] font-bold text-indigo-600 tracking-[0.2em] uppercase">AI • Marketing • Automation</span>
+            </div>
+        </a>
+        
+        <div class="hidden lg:flex items-center gap-5">
+            <a href="#home" class="nav-link">Home</a>
+            <div class="relative group">
+                <a href="#" class="nav-link flex items-center gap-1">Services <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-60"></i></a>
+                <div class="mega-menu">
+                    <div class="mega-menu-grid">
+                        <div class="mega-menu-section"><div class="menu-section-title">SEO Services</div><div><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Search Engine Optimization</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">eCommerce SEO</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Local SEO</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">SEO Audit</a></div></div>
+                        <div class="mega-menu-section"><div class="menu-section-title">Paid Advertising</div><div><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">PPC Management</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Google Ads</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Display & Shopping Ads</a></div></div>
+                        <div class="mega-menu-section"><div class="menu-section-title">Social Media & Content</div><div><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Facebook & Instagram</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Content Marketing</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">App Marketing</a></div></div>
+                        <div class="mega-menu-section"><div class="menu-section-title">Web & Development</div><div><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Website Design & Development</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Software Solution</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Web Hosting</a></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative group">
+                <a href="#" class="nav-link flex items-center gap-1">AI Solutions <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-60"></i></a>
+                <div class="mega-menu">
+                    <div class="mega-menu-grid two-col">
+                        <div class="mega-menu-section"><div class="menu-section-title">Conversational AI</div><div><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">WhatsApp API Platform</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">AI Chatbot Builder</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Automation Workflows</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Visual Bot Builder</a></div></div>
+                        <div class="mega-menu-section"><div class="menu-section-title">CRM & Integration</div><div><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Intelligent CRM</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Multichannel Team Inbox</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Automation Builder</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Shopify/WooCommerce Integration</a></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative group">
+                <a href="#" class="nav-link flex items-center gap-1">Products <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-60"></i></a>
+                <div class="mega-menu">
+                    <div class="mega-menu-grid">
+                        <div class="mega-menu-section"><div class="menu-section-title">Business Suite</div><div><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Smart CRM Dashboard</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Lead Capture Hub</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Sales Pipeline Pro</a></div></div>
+                        <div class="mega-menu-section"><div class="menu-section-title">Marketing Tools</div><div><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Campaign Manager</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Email Flow Studio</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Social Scheduler</a></div></div>
+                        <div class="mega-menu-section"><div class="menu-section-title">Commerce Products</div><div><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Storefront Builder</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Inventory Sync</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Order Tracker</a></div></div>
+                        <div class="mega-menu-section"><div class="menu-section-title">Analytics</div><div><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Insight Reports</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Customer Journey Map</a><a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Performance Monitor</a></div></div>
+                    </div>
+                </div>
+            </div>
+            <a href="#about" class="nav-link">About Us</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        
+        <div class="flex items-center gap-3">
+            <a href="#contact" class="hidden md:inline-flex nav-cta"><span class="nav-cta-text">Get Quote</span><span class="nav-cta-icon"><i data-lucide="arrow-up-right" class="w-4 h-4"></i></span></a>
+            <button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl hover:bg-slate-100 transition" aria-label="Open menu" aria-expanded="false"><span class="menu-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="mobile-menu">
+    <div class="mobile-menu-panel">
+        <div class="flex-1 px-6 py-5">
+            <a href="#home" class="mobile-nav-link">Home</a>
+            <details>
+                <summary>Services</summary>
+                <div class="mobile-menu-group">
+                    <div class="mobile-menu-title">SEO Services</div>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Search Engine Optimization</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">eCommerce SEO</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Local SEO</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">SEO Audit</a>
+                    <div class="mobile-menu-title">Paid Advertising</div>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">PPC Management</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Google Ads</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Display & Shopping Ads</a>
+                    <div class="mobile-menu-title">Social Media & Content</div>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Facebook & Instagram</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Content Marketing</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">App Marketing</a>
+                    <div class="mobile-menu-title">Web & Development</div>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Website Design & Development</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Software Solution</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Web Hosting</a>
+                </div>
+            </details>
+            <details>
+                <summary>AI Solutions</summary>
+                <div class="mobile-menu-group">
+                    <div class="mobile-menu-title">Conversational AI</div>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">WhatsApp API Platform</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">AI Chatbot Builder</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Automation Workflows</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Visual Bot Builder</a>
+                    <div class="mobile-menu-title">CRM & Integration</div>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Intelligent CRM</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Multichannel Team Inbox</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Automation Builder</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Shopify/WooCommerce Integration</a>
+                </div>
+            </details>
+            <details>
+                <summary>Products</summary>
+                <div class="mobile-menu-group">
+                    <div class="mobile-menu-title">Business Suite</div>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Smart CRM Dashboard</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Lead Capture Hub</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Sales Pipeline Pro</a>
+                    <div class="mobile-menu-title">Marketing Tools</div>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Campaign Manager</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Email Flow Studio</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Social Scheduler</a>
+                    <div class="mobile-menu-title">Commerce Products</div>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Storefront Builder</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Inventory Sync</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Order Tracker</a>
+                    <div class="mobile-menu-title">Analytics</div>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Insight Reports</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Customer Journey Map</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Performance Monitor</a>
+                </div>
+            </details>
+            <a href="#about" class="mobile-nav-link">About Us</a>
+            <a href="#contact" class="mobile-nav-link">Contact</a>
+        </div>
+        <div class="px-6 pb-6 pt-2"><a href="#contact" class="flex items-center justify-center gap-2 bg-indigo-600 text-white font-semibold py-3.5 rounded-xl w-full">Get Quote</a></div>
+    </div>
+</div>
+
+<!-- ========== HERO SECTION - Centered with Rich Content ========== -->
+<section id="home" class="relative min-h-[90vh] flex items-center justify-center text-center overflow-hidden bg-gradient-to-br from-slate-50 via-indigo-50/20 to-violet-50/30">
+    <div class="absolute inset-0"><div class="absolute top-20 right-10 w-72 h-72 bg-indigo-200/20 rounded-full blur-3xl"></div><div class="absolute bottom-10 left-10 w-80 h-80 bg-emerald-200/15 rounded-full blur-3xl"></div></div>
+    <div class="max-w-5xl mx-auto px-6 md:px-8 py-16 md:py-20 relative z-10">
+        <div class="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md border border-slate-200 rounded-full px-4 py-1.5 mb-6 shadow-sm afade mx-auto">
+            <span class="relative flex w-2 h-2"><span class="animate-ping absolute inset-0 rounded-full bg-emerald-400"></span><span class="relative rounded-full w-2 h-2 bg-emerald-500"></span></span>
+            <span class="text-[11px] font-bold uppercase tracking-wide text-slate-700">Since 2011 • Trusted Globally</span>
+        </div>
+        <h1 class="afade text-[3.5rem] font-extrabold tracking-tight text-slate-500 leading-[1.15] mb-5">We Elevate Your Business with <br><span class="gradient-text-hero">Strategy, Planning & Optimization</span></h1>
+        <p class="afade text-slate-600 text-base md:text-lg max-w-3xl mx-auto mb-6">Digital Inventa is a full-service digital marketing agency that combines creativity, modern technology, and result-driven strategies to elevate brands to the next level.</p>
+        <div class="afade flex flex-wrap gap-4 justify-center mb-10"><a href="#contact" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-7 py-3.5 rounded-xl shadow-lg">Get a Quote <i data-lucide="arrow-right" class="w-4 h-4"></i></a><a href="#demo" class="inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm hover:bg-white text-slate-700 font-medium px-7 py-3.5 rounded-xl border border-slate-200">Get Demo <i data-lucide="play" class="w-4 h-4"></i></a></div>
+        <div class="afade hero-stats">
+            <div class="hero-stat-card">
+                <div class="hero-stat-accent indigo"><i data-lucide="briefcase-business" class="w-5 h-5"></i></div>
+                <div class="hero-stat-value"><span class="stat-number" data-target="13">0</span>+</div>
+                <span class="hero-stat-label">Years of Excellence</span>
+            </div>
+            <div class="hero-stat-card">
+                <div class="hero-stat-accent emerald"><i data-lucide="rocket" class="w-5 h-5"></i></div>
+                <div class="hero-stat-value"><span class="stat-number" data-target="500">0</span>+</div>
+                <span class="hero-stat-label">Projects Completed</span>
+            </div>
+            <div class="hero-stat-card">
+                <div class="hero-stat-accent amber"><i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i></div>
+                <div class="hero-stat-value">4.9+</div>
+                <span class="hero-stat-label">Client Rating</span>
+            </div>
+            <div class="hero-stat-card">
+                <div class="hero-stat-accent sky"><i data-lucide="users" class="w-5 h-5"></i></div>
+                <div class="hero-stat-value"><span class="stat-number" data-target="20">0</span>+</div>
+                <span class="hero-stat-label">Expert Team</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== PARTNERS SECTION ========== -->
+<section class="py-12 bg-white border-y border-slate-100">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <p class="text-center text-sm font-semibold text-slate-400 uppercase tracking-wider mb-8">Trusted by Industry Leaders</p>
+        <div class="partners-marquee">
+            <div class="partners-track">
+                <div class="partner-slide"><img src="partners/1.png" alt="Partner logo 1" class="partner-logo"></div>
+                <div class="partner-slide"><img src="partners/2.jpg" alt="Partner logo 2" class="partner-logo"></div>
+                <div class="partner-slide"><img src="partners/3.webp" alt="Partner logo 3" class="partner-logo"></div>
+                <div class="partner-slide"><img src="partners/4.png" alt="Partner logo 4" class="partner-logo"></div>
+                <div class="partner-slide"><img src="partners/5.png" alt="Partner logo 5" class="partner-logo"></div>
+                <div class="partner-slide"><img src="partners/6.png" alt="Partner logo 6" class="partner-logo"></div>
+                <div class="partner-slide"><img src="partners/7.png" alt="Partner logo 7" class="partner-logo"></div>
+                <div class="partner-slide"><img src="partners/8.png" alt="Partner logo 8" class="partner-logo"></div>
+                <div class="partner-slide"><img src="partners/9.png" alt="Partner logo 9" class="partner-logo"></div>
+                <div class="partner-slide" aria-hidden="true"><img src="partners/1.png" alt="" class="partner-logo"></div>
+                <div class="partner-slide" aria-hidden="true"><img src="partners/2.jpg" alt="" class="partner-logo"></div>
+                <div class="partner-slide" aria-hidden="true"><img src="partners/3.webp" alt="" class="partner-logo"></div>
+                <div class="partner-slide" aria-hidden="true"><img src="partners/4.png" alt="" class="partner-logo"></div>
+                <div class="partner-slide" aria-hidden="true"><img src="partners/5.png" alt="" class="partner-logo"></div>
+                <div class="partner-slide" aria-hidden="true"><img src="partners/6.png" alt="" class="partner-logo"></div>
+                <div class="partner-slide" aria-hidden="true"><img src="partners/7.png" alt="" class="partner-logo"></div>
+                <div class="partner-slide" aria-hidden="true"><img src="partners/8.png" alt="" class="partner-logo"></div>
+                <div class="partner-slide" aria-hidden="true"><img src="partners/9.png" alt="" class="partner-logo"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== SERVICES SECTION with Full Descriptions ========== -->
+<section id="services" class="py-24 md:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-12 rv"><span class="text-indigo-600 text-[11px] font-bold uppercase tracking-[0.2em]">What We Offer</span><h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Driven Digital Marketing Services</h2><p class="text-slate-500 max-w-2xl mx-auto mt-3">Result-driven strategies to elevate your brand's online presence and drive measurable growth.</p></div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="rv service-card"><i data-lucide="search" class="w-10 h-10 text-indigo-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">SEO – Search Engine Optimization</h3><p class="text-slate-500 text-sm leading-relaxed">Any business's marketing outcome is heavily influenced by organic SEO. Our SEO services are mostly focused on ensuring that your website's architecture complies with Google's most recent algorithm. We optimize content, establish high-quality backlinks, and use smart content marketing to improve your site's search engine ranking and attract high-quality visitors.</p></div>
+            <div class="rv rvd service-card"><i data-lucide="trending-up" class="w-10 h-10 text-emerald-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">PPC Management Services</h3><p class="text-slate-500 text-sm leading-relaxed">We advise you to use PPC management services to increase and accelerate market penetration. Paid channels generate immediate leads when it comes to launching a new product or making a profitable offer. You can expect to reach a large audience and maximize your investment with our optimized Google search ads, display & shopping ads, and Bing ads.</p></div>
+            <div class="rv service-card"><i data-lucide="shopping-cart" class="w-10 h-10 text-violet-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">eCommerce SEO Services</h3><p class="text-slate-500 text-sm leading-relaxed">Our e-commerce SEO service includes a comprehensive technical SEO analysis of your site. Keyword research, meta tag optimization, traffic analysis, page speed analysis, off-page SEO, setting up product schema, guaranteeing cross device responsiveness, and many more are just a few of our major services.</p></div>
+            <div class="rv rvd service-card"><i data-lucide="file-text" class="w-10 h-10 text-amber-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">Content Marketing Services</h3><p class="text-slate-500 text-sm leading-relaxed">A well-written piece of content raises brand awareness and improves conversion rates. Content marketing services are an excellent method of link building. We compile various forms of content for websites and apps, such as blogs, infographics, videos, and ebooks.</p></div>
+            <div class="rv service-card"><i data-lucide="share-2" class="w-10 h-10 text-rose-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">SMM - Social Media Marketing</h3><p class="text-slate-500 text-sm leading-relaxed">Our complete SEM services approach to creating and publishing material on various social media channels such as Facebook, LinkedIn to garner user attention. We create unique and location-based paid advertisements to ensure quality traffic to your website and app.</p></div>
+            <div class="rv rvd service-card"><i data-lucide="smartphone" class="w-10 h-10 text-sky-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">Mobile App Marketing</h3><p class="text-slate-500 text-sm leading-relaxed">Our all-encompassing approach to mobile app marketing raises brand recognition and encourages additional downloads. We provide excellent app store optimization services and paid ad campaigns to promote your apps on app stores and social media platforms.</p></div>
+            <div class="rv service-card"><i data-lucide="map-pin" class="w-10 h-10 text-teal-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">Local SEO Services</h3><p class="text-slate-500 text-sm leading-relaxed">Our local SEO services help you attract customers to your business and improve your brand's presence in geo-targeted searches. We handle keyword optimization, business directories, Google My Business page, and NAP verification.</p></div>
+            <div class="rv rvd service-card"><i data-lucide="clipboard-list" class="w-10 h-10 text-orange-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">SEO Audit</h3><p class="text-slate-500 text-sm leading-relaxed">An SEO audit can reveal obstacles, why you're not meeting SEO objectives, and techniques competitors are using. Our in-depth audits look at code, site structure, content, identifying opportunities and laying out a plan for the future.</p></div>
+            <div class="rv service-card"><i data-lucide="code" class="w-10 h-10 text-indigo-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">Website Design & Development</h3><p class="text-slate-500 text-sm leading-relaxed">Stunning, user-friendly website design and development. Software solutions and web hosting services to elevate your business with strategy, planning, measuring & proper optimization.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== TESTIMONIALS SECTION ========== -->
+<section class="py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-12 rv"><span class="text-indigo-600 text-[11px] font-bold uppercase tracking-[0.2em]">Testimonials</span><h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">What Our Clients Say</h2><p class="text-slate-500 mt-2">Real success stories from businesses we've helped grow</p></div>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="rv bg-white rounded-2xl p-7 shadow-sm border border-slate-100"><div class="flex gap-0.5 mb-4"><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i></div><p class="text-slate-600 text-sm mb-5">"Digital Inventa transformed our online presence. Their SEO strategy increased our organic traffic by 200% in just 4 months. Highly recommended!"</p><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center"><span class="font-bold text-indigo-600">MR</span></div><div><h4 class="font-bold text-slate-800">Mahfuz Rahman</h4><p class="text-xs text-slate-500">CEO, BFC</p></div></div></div>
+            <div class="rv rvd bg-white rounded-2xl p-7 shadow-sm border border-slate-100"><div class="flex gap-0.5 mb-4"><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i></div><p class="text-slate-600 text-sm mb-5">"The WhatsApp API solution they built for us revolutionized customer support. Response time dropped by 85%. Absolutely game-changing!"</p><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center"><span class="font-bold text-emerald-600">SI</span></div><div><h4 class="font-bold text-slate-800">Sharmin Islam</h4><p class="text-xs text-slate-500">Marketing Director, Axiata</p></div></div></div>
+            <div class="rv bg-white rounded-2xl p-7 shadow-sm border border-slate-100"><div class="flex gap-0.5 mb-4"><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i></div><p class="text-slate-600 text-sm mb-5">"Their team's expertise in PPC and social media marketing helped us achieve a 3x ROI. Professional, data-driven, and results-oriented."</p><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-violet-100 flex items-center justify-center"><span class="font-bold text-violet-600">TK</span></div><div><h4 class="font-bold text-slate-800">Tanvir Khan</h4><p class="text-xs text-slate-500">Founder, Digitel</p></div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== AI AUTOMATION FEATURES SECTION (Expanded) ========== -->
+<section class="py-24 bg-gradient-to-br from-slate-900 to-slate-800">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-12 rv"><span class="text-indigo-300 text-[11px] font-bold uppercase tracking-[0.2em]">AI Automation Platform</span><h2 class="text-white text-3xl md:text-4xl font-bold">Powerful Features for Modern Business</h2><p class="text-slate-300 mt-3 max-w-2xl mx-auto">Complete ecosystem for conversational AI, CRM, and marketing automation</p></div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="message-circle" class="w-8 h-8 text-emerald-400 mb-3"></i><h3 class="text-white font-bold">WhatsApp API Platform</h3><p class="text-slate-400 text-sm">Send & receive messages via Official WhatsApp APIs and Webhooks.</p></div>
+            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="facebook" class="w-8 h-8 text-blue-400 mb-3"></i><h3 class="text-white font-bold">Facebook Integration</h3><p class="text-slate-400 text-sm">Integrate Facebook Messenger for seamless customer communication.</p></div>
+            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="instagram" class="w-8 h-8 text-pink-400 mb-3"></i><h3 class="text-white font-bold">Instagram Integration</h3><p class="text-slate-400 text-sm">Manage Instagram messages and interactions efficiently.</p></div>
+            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="users" class="w-8 h-8 text-indigo-400 mb-3"></i><h3 class="text-white font-bold">Intelligent CRM</h3><p class="text-slate-400 text-sm">Our In-Built CRM enables you to add various tags & attributes to customers.</p></div>
+            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="git-branch" class="w-8 h-8 text-violet-400 mb-3"></i><h3 class="text-white font-bold">Visual Bot Builder</h3><p class="text-slate-400 text-sm">Create Bots Easily Using Our Drag & Drop Bot Builder.</p></div>
+            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="calendar" class="w-8 h-8 text-amber-400 mb-3"></i><h3 class="text-white font-bold">Calendar Bot</h3><p class="text-slate-400 text-sm">Complete appointment booking ecosystem with smart scheduling.</p></div>
+            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="ticket" class="w-8 h-8 text-rose-400 mb-3"></i><h3 class="text-white font-bold">Tickets Bot</h3><p class="text-slate-400 text-sm">Comprehensive event ticketing system with QR code support.</p></div>
+            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="qrcode" class="w-8 h-8 text-cyan-400 mb-3"></i><h3 class="text-white font-bold">Dynamic QR Bot</h3><p class="text-slate-400 text-sm">Create and manage dynamic QR codes for various campaigns.</p></div>
+            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="gift" class="w-8 h-8 text-yellow-400 mb-3"></i><h3 class="text-white font-bold">Reward Points</h3><p class="text-slate-400 text-sm">Run comprehensive loyalty programs with point tracking.</p></div>
+            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="sparkles" class="w-8 h-8 text-purple-400 mb-3"></i><h3 class="text-white font-bold">Dynamic Experiences</h3><p class="text-slate-400 text-sm">Create dynamic images and HTML pages for rich interactions.</p></div>
+            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="inbox" class="w-8 h-8 text-teal-400 mb-3"></i><h3 class="text-white font-bold">Multichannel Team Inbox</h3><p class="text-slate-400 text-sm">A multi-channel chat panel for your team to manage communication easily.</p></div>
+            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="zap" class="w-8 h-8 text-orange-400 mb-3"></i><h3 class="text-white font-bold">Automation Builder</h3><p class="text-slate-400 text-sm">Easily Integrate With Shopify, WooCommerce, and 1000+ Tools.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== EXPERTISE OPINION & BLOG SECTION ========== -->
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-12 rv"><span class="text-indigo-600 text-[11px] font-bold uppercase tracking-[0.2em]">Expertise & Insights</span><h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Latest from Our Blog</h2><p class="text-slate-500 mt-2">Expert opinions, industry trends, and actionable insights</p></div>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="rv bg-slate-50 rounded-2xl overflow-hidden hover:shadow-lg transition border border-slate-100"><img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=600" alt="AI Trends" class="w-full h-52 object-cover"><div class="p-6"><p class="text-xs text-indigo-600 font-semibold mb-2">Expertise Opinion • April 2025</p><h3 class="text-xl font-bold text-slate-800 mb-2">The Future of AI in Digital Marketing</h3><p class="text-slate-500 text-sm">How artificial intelligence is reshaping customer engagement and ROI for businesses in 2025.</p><a href="#" class="inline-flex items-center gap-1 text-indigo-600 text-sm font-semibold mt-4 hover:gap-2 transition-all" onclick="alert('Blog content coming soon'); return false;">Read More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a></div></div>
+            <div class="rv rvd bg-slate-50 rounded-2xl overflow-hidden hover:shadow-lg transition border border-slate-100"><img src="https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=600" alt="WhatsApp Marketing" class="w-full h-52 object-cover"><div class="p-6"><p class="text-xs text-indigo-600 font-semibold mb-2">Strategy • April 2025</p><h3 class="text-xl font-bold text-slate-800 mb-2">WhatsApp API: The Ultimate Marketing Channel</h3><p class="text-slate-500 text-sm">Discover how businesses are leveraging WhatsApp Business API to boost sales and customer loyalty.</p><a href="#" class="inline-flex items-center gap-1 text-indigo-600 text-sm font-semibold mt-4 hover:gap-2 transition-all" onclick="alert('Blog content coming soon'); return false;">Read More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a></div></div>
+            <div class="rv bg-slate-50 rounded-2xl overflow-hidden hover:shadow-lg transition border border-slate-100"><img src="https://images.pexels.com/photos/4962011/pexels-photo-4962011.jpeg?auto=compress&cs=tinysrgb&w=600" alt="SEO Trends" class="w-full h-52 object-cover"><div class="p-6"><p class="text-xs text-indigo-600 font-semibold mb-2">SEO Insights • March 2025</p><h3 class="text-xl font-bold text-slate-800 mb-2">2025 SEO Trends: What's Working Now</h3><p class="text-slate-500 text-sm">From EEAT to AI overviews, learn the latest SEO strategies to dominate search rankings.</p><a href="#" class="inline-flex items-center gap-1 text-indigo-600 text-sm font-semibold mt-4 hover:gap-2 transition-all" onclick="alert('Blog content coming soon'); return false;">Read More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a></div></div>
+        </div>
+        <div class="text-center mt-10"><a href="#" class="inline-flex items-center gap-2 text-indigo-600 font-semibold hover:gap-3 transition-all" onclick="alert('More blogs coming soon'); return false;">View All Articles <i data-lucide="arrow-right" class="w-4 h-4"></i></a></div>
+    </div>
+</section>
+
+<!-- ========== ABOUT US ========== -->
+<section id="about" class="py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="grid lg:grid-cols-2 gap-14 items-center">
+            <div class="rv"><span class="text-indigo-600 text-[11px] font-bold uppercase tracking-[0.2em]">About Us</span><h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 leading-tight">Full-Service Digital Marketing Agency</h2><p class="text-slate-600 mt-5 leading-relaxed">Digital Inventa combines creativity, modern technology, and result-driven strategies to elevate brands to the next level. We specialize in Whatsapp API development, AI Solutions, Digital Transformation, CRM Auto Messaging, Purified Lead Collection, Data Driven Marketing, brand development, and software development.</p><p class="text-slate-600 mt-4">Since our inception in 2011, we have gained over a decade of experience working with renowned companies across the globe.</p><div class="grid grid-cols-2 gap-4 mt-8"><div class="bg-white rounded-xl p-4"><div class="text-2xl font-black text-indigo-600">13+</div><div class="text-slate-500 text-sm">Years Experience</div></div><div class="bg-white rounded-xl p-4"><div class="text-2xl font-black text-indigo-600">500+</div><div class="text-slate-500 text-sm">Projects Delivered</div></div></div></div>
+            <div class="rv rvd relative"><div class="rounded-3xl overflow-hidden shadow-2xl"><img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Digital Inventa Team" class="w-full h-[420px] object-cover"></div><div class="absolute -bottom-5 -left-5 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-xl"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-indigo-100"><i data-lucide="zap" class="w-5 h-5 text-indigo-600 m-2.5"></i></div><div><div class="font-bold">Data-Driven</div><div class="text-xs">Result-oriented strategies</div></div></div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CONTACT & DEMO ========== -->
+<section id="contact" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="grid md:grid-cols-2 gap-12">
+            <div class="rv"><h2 class="text-3xl font-bold text-slate-900">Let's Elevate Your Business</h2><p class="text-slate-500 mt-3">Tell us about your project. We respond within 4 hours.</p><div class="mt-8"><div class="flex gap-4 p-4 bg-slate-50 rounded-xl"><i data-lucide="mail" class="text-indigo-500"></i><div><p class="font-medium">hello@digitalinventa.com</p></div></div><div class="flex gap-4 p-4 bg-slate-50 rounded-xl mt-3"><i data-lucide="phone" class="text-indigo-500"></i><div><p class="font-medium">+880 1234 567890</p></div></div></div></div>
+            <div class="rv rvd"><form id="contactForm" class="bg-slate-50 rounded-2xl p-7 border border-slate-200 space-y-4"><input type="text" placeholder="Full name" class="w-full px-4 py-3 rounded-xl border border-slate-200" required><input type="email" placeholder="Email address" class="w-full px-4 py-3 rounded-xl border border-slate-200" required><textarea rows="4" placeholder="Project details..." class="w-full px-4 py-3 rounded-xl border border-slate-200" required></textarea><button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl transition">Send Message</button></form></div>
+        </div>
+    </div>
+</section>
+
+<section id="demo" class="py-16 bg-indigo-600"><div class="max-w-4xl mx-auto px-6 md:px-8 text-center"><h2 class="text-3xl font-bold text-white">Ready to See Our Platform in Action?</h2><p class="text-indigo-100 mt-3 mb-6">Book a free demo with our AI and marketing experts</p><a href="#contact" class="inline-flex items-center gap-2 bg-white text-indigo-600 font-semibold px-8 py-3 rounded-xl hover:shadow-lg transition">Get a Demo <i data-lucide="play" class="w-4 h-4"></i></a></div></section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="bg-slate-900 pt-14 pb-10 text-slate-400">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="footer-grid">
+            <div><div class="flex items-center mb-4"><img src="logo.png" alt="Digital Inventa" class="brand-logo"></div><p class="text-sm">Full-service digital marketing agency combining creativity, technology, and result-driven strategies.</p></div>
+            <div><h4 class="text-white text-sm font-bold mb-4">Quick Links</h4><ul class="space-y-2 text-sm"><li><a href="#home" class="hover:text-white transition">Home</a></li><li><a href="#about" class="hover:text-white transition">About Us</a></li><li><a href="#contact" class="hover:text-white transition">Contact</a></li><li><a href="#demo" class="hover:text-white transition">Get Demo</a></li></ul></div>
+            <div><h4 class="text-white text-sm font-bold mb-4">Our Services</h4><ul class="space-y-2 text-sm"><li><a href="#" onclick="alert('Content coming soon'); return false;" class="hover:text-white">SEO & PPC</a></li><li><a href="#" onclick="alert('Content coming soon'); return false;" class="hover:text-white">Social Media Marketing</a></li><li><a href="#" onclick="alert('Content coming soon'); return false;" class="hover:text-white">WhatsApp API</a></li><li><a href="#" onclick="alert('Content coming soon'); return false;" class="hover:text-white">Web Development</a></li></ul></div>
+            <div><h4 class="text-white text-sm font-bold mb-4">Contact</h4><ul class="space-y-2 text-sm"><li class="flex gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> Dhaka, Bangladesh</li><li class="flex gap-2"><i data-lucide="mail" class="w-4 h-4"></i> hello@digitalinventa.com</li><li class="flex gap-2"><i data-lucide="phone" class="w-4 h-4"></i> +880 1234 567890</li></ul></div>
+        </div>
+        <div class="border-t border-slate-800 mt-10 pt-6 text-center text-xs">© 2025 Digital Inventa. All rights reserved. Strategy • Planning • Measuring • Optimization</div>
+    </div>
+</footer>
+
+<div id="toastMsg" class="fixed bottom-6 right-6 z-50 bg-white/90 backdrop-blur rounded-2xl shadow-xl px-5 py-3 flex items-center gap-3 transition-all duration-300 translate-y-8 opacity-0 pointer-events-none"><i data-lucide="check-circle" class="w-5 h-5 text-emerald-500"></i><span id="toastText">Success</span></div>
+
+<script>
+lucide.createIcons();
+const menuToggle = document.getElementById('menuToggle'), mobileMenu = document.getElementById('mobileMenu');
+const socialFab = document.getElementById('socialFab'), socialToggle = document.getElementById('socialToggle');
+const toggleMobileMenu = (isOpen) => {
+    if(!mobileMenu || !menuToggle) return;
+    mobileMenu.classList.toggle('open', isOpen);
+    menuToggle.classList.toggle('active', isOpen);
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+};
+if(menuToggle) menuToggle.onclick = () => toggleMobileMenu(!mobileMenu.classList.contains('open'));
+if(socialToggle) socialToggle.onclick = () => {
+    const isOpen = !socialFab.classList.contains('open');
+    socialFab.classList.toggle('open', isOpen);
+    socialToggle.setAttribute('aria-expanded', String(isOpen));
+};
+document.querySelectorAll('.mobile-menu a, .mobile-menu summary').forEach(l => { if(l.tagName !== 'SUMMARY') l.onclick = () => toggleMobileMenu(false); });
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => { if(window.scrollY > 20) nav.classList.add('nav-scrolled'); else nav.classList.remove('nav-scrolled'); });
+const revealItems = document.querySelectorAll('.rv');
+const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('on'); observer.unobserve(e.target); } }); }, { threshold: 0.1 });
+revealItems.forEach(el => observer.observe(el));
+const stats = document.querySelectorAll('.stat-number[data-target]');
+const statObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) { const el = entry.target; const target = parseFloat(el.dataset.target); let current = 0; const inc = target / 45; const update = () => { current += inc; if(current < target) { el.innerText = Math.floor(current); requestAnimationFrame(update); } else { el.innerText = target; } }; requestAnimationFrame(update); statObserver.unobserve(el); } }); }, { threshold: 0.5 });
+stats.forEach(s => statObserver.observe(s));
+function showToast(msg) { const toast = document.getElementById('toastMsg'); document.getElementById('toastText').innerText = msg; toast.classList.remove('opacity-0','translate-y-8','pointer-events-none'); toast.classList.add('opacity-100','translate-y-0'); setTimeout(() => { toast.classList.add('opacity-0','translate-y-8','pointer-events-none'); }, 3200); }
+document.getElementById('contactForm')?.addEventListener('submit', (e) => { e.preventDefault(); showToast('Message sent! We’ll respond within 4 hours.'); e.target.reset(); });
+document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function(e) { const href = this.getAttribute('href'); if(href === '#') return; e.preventDefault(); const target = document.querySelector(href); if(target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); }); });
+</script>
+</body>
+</html>
