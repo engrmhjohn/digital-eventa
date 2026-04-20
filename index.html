@@ -144,20 +144,23 @@
             .partner-slide { width: 140px; padding: 0 1rem; }
             .partner-logo { max-height: 40px; }
         }
-        .trusted-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1rem; }
-        .trusted-logo-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 1.25rem; min-height: 110px; display: flex; align-items: center; justify-content: center; padding: 1.25rem; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
-        .trusted-logo-card:hover { transform: translateY(-3px); box-shadow: 0 16px 28px rgba(15,23,42,0.08); border-color: #c7d2fe; }
-        .trusted-logo { max-width: 100%; max-height: 52px; width: auto; object-fit: contain; }
+        .trusted-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: 2.5rem; row-gap: 3rem; align-items: center; }
+        .trusted-logo-item { min-height: 88px; display: flex; align-items: center; justify-content: center; padding: 0.5rem 0.25rem; }
+        .trusted-logo { max-width: 100%; max-height: 60px; width: auto; object-fit: contain; filter: saturate(1.02); transition: transform 0.25s ease, filter 0.25s ease, opacity 0.25s ease; }
+        .trusted-logo-item:hover .trusted-logo { transform: scale(1.05); filter: saturate(1.1); opacity: 0.96; }
         @media (max-width: 1024px) {
             .trusted-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
         }
         @media (max-width: 768px) {
             .trusted-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-            .trusted-logo-card { min-height: 96px; padding: 1rem; }
-            .trusted-logo { max-height: 42px; }
+            .trusted-grid { column-gap: 1.75rem; row-gap: 2.25rem; }
+            .trusted-logo-item { min-height: 74px; }
+            .trusted-logo { max-height: 48px; }
         }
         @media (max-width: 520px) {
             .trusted-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .trusted-grid { column-gap: 1.25rem; row-gap: 1.75rem; }
+            .trusted-logo { max-height: 42px; }
         }
         .faq-shell { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); gap: 2rem; align-items: start; }
         .faq-intro { background: linear-gradient(145deg, #0f172a, #1e293b); color: #fff; border-radius: 2rem; padding: 2rem; position: sticky; top: 96px; overflow: hidden; }
@@ -276,6 +279,29 @@
                 </div>
             </div>
             <div class="relative group">
+                <a href="#" class="nav-link flex items-center gap-1">Digital PR <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-60"></i></a>
+                <div class="mega-menu">
+                    <div class="mega-menu-grid two-col">
+                        <div class="mega-menu-section">
+                            <div class="menu-section-title">Digital PR</div>
+                            <div>
+                                <a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">ATL</a>
+                                <a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">BTL</a>
+                                <a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Influencer Marketing</a>
+                            </div>
+                        </div>
+                        <div class="mega-menu-section">
+                            <div class="menu-section-title">Brand Communications</div>
+                            <div>
+                                <a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Content Marketing</a>
+                                <a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">Social Media PR</a>
+                                <a href="#" class="menu-sub-link" onclick="alert('Content coming soon'); return false;">ORM</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative group">
                 <a href="#" class="nav-link flex items-center gap-1">AI Solutions <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-60"></i></a>
                 <div class="mega-menu">
                     <div class="mega-menu-grid two-col">
@@ -349,6 +375,19 @@
                 </div>
             </details>
             <details>
+                <summary>Digital PR</summary>
+                <div class="mobile-menu-group">
+                    <div class="mobile-menu-title">Digital PR</div>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">ATL</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">BTL</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Influencer Marketing</a>
+                    <div class="mobile-menu-title">Brand Communications</div>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Content Marketing</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">Social Media PR</a>
+                    <a href="#" onclick="alert('Content coming soon'); return false;" class="mobile-sub-link">ORM</a>
+                </div>
+            </details>
+            <details>
                 <summary>Products</summary>
                 <div class="mobile-menu-group">
                     <div class="mobile-menu-title">Business Suite</div>
@@ -384,7 +423,7 @@
             <span class="relative flex w-2 h-2"><span class="animate-ping absolute inset-0 rounded-full bg-emerald-400"></span><span class="relative rounded-full w-2 h-2 bg-emerald-500"></span></span>
             <span class="text-[11px] font-bold uppercase tracking-wide text-slate-700">Since 2011 • Trusted Globally</span>
         </div>
-        <h1 class="afade text-[3.5rem] font-extrabold tracking-tight text-slate-500 leading-[1.15] mb-5">We Elevate Your Business with <br><span class="gradient-text-hero">AI Driven Strategy, Planning & Optimization</span></h1>
+        <h1 class="afade text-[2rem] md:text-[3.5rem] font-extrabold tracking-tight text-slate-500 leading-[1.15] mb-5">We Elevate Your Business with <br><span class="gradient-text-hero">AI Driven Strategy, Planning & Optimization</span></h1>
         <p class="afade text-slate-600 text-base md:text-lg max-w-3xl mx-auto mb-6">Digital Inventa is a full-service digital marketing agency that combines creativity, modern technology, and result-driven strategies to elevate brands to the next level.</p>
         <div class="afade flex flex-wrap gap-4 justify-center mb-10"><a href="#contact" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-7 py-3.5 rounded-xl shadow-lg">Get a Quote <i data-lucide="arrow-right" class="w-4 h-4"></i></a><a href="#demo" class="inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm hover:bg-white text-slate-700 font-medium px-7 py-3.5 rounded-xl border border-slate-200">Get Demo <i data-lucide="play" class="w-4 h-4"></i></a></div>
         <div class="afade hero-stats">
@@ -408,6 +447,80 @@
                 <div class="hero-stat-value"><span class="stat-number" data-target="20">0</span>+</div>
                 <span class="hero-stat-label">Expert Team</span>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== AI AUTOMATION FEATURES SECTION (Expanded) ========== -->
+<section class="py-24 bg-gradient-to-br from-slate-900 to-slate-800">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-12 rv"><span class="text-indigo-300 text-[11px] font-bold uppercase tracking-[0.2em]">AI Automation Platform</span><h2 class="text-white text-3xl md:text-4xl font-bold">Powerful Features for Modern Business</h2><p class="text-slate-300 mt-3 max-w-2xl mx-auto">Complete ecosystem for conversational AI, CRM, and marketing automation</p></div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="message-circle" class="w-8 h-8 text-emerald-400 mb-3"></i><h3 class="text-white font-bold">WhatsApp API Platform</h3><p class="text-slate-400 text-sm">Send & receive messages via Official WhatsApp APIs and Webhooks.</p></div>
+            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="facebook" class="w-8 h-8 text-blue-400 mb-3"></i><h3 class="text-white font-bold">Facebook Integration</h3><p class="text-slate-400 text-sm">Integrate Facebook Messenger for seamless customer communication.</p></div>
+            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="instagram" class="w-8 h-8 text-pink-400 mb-3"></i><h3 class="text-white font-bold">Instagram Integration</h3><p class="text-slate-400 text-sm">Manage Instagram messages and interactions efficiently.</p></div>
+            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="users" class="w-8 h-8 text-indigo-400 mb-3"></i><h3 class="text-white font-bold">Intelligent CRM</h3><p class="text-slate-400 text-sm">Our In-Built CRM enables you to add various tags & attributes to customers.</p></div>
+            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="git-branch" class="w-8 h-8 text-violet-400 mb-3"></i><h3 class="text-white font-bold">Visual Bot Builder</h3><p class="text-slate-400 text-sm">Create Bots Easily Using Our Drag & Drop Bot Builder.</p></div>
+            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="calendar" class="w-8 h-8 text-amber-400 mb-3"></i><h3 class="text-white font-bold">Calendar Bot</h3><p class="text-slate-400 text-sm">Complete appointment booking ecosystem with smart scheduling.</p></div>
+            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="ticket" class="w-8 h-8 text-rose-400 mb-3"></i><h3 class="text-white font-bold">Tickets Bot</h3><p class="text-slate-400 text-sm">Comprehensive event ticketing system with QR code support.</p></div>
+            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="qrcode" class="w-8 h-8 text-cyan-400 mb-3"></i><h3 class="text-white font-bold">Dynamic QR Bot</h3><p class="text-slate-400 text-sm">Create and manage dynamic QR codes for various campaigns.</p></div>
+            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="gift" class="w-8 h-8 text-yellow-400 mb-3"></i><h3 class="text-white font-bold">Reward Points</h3><p class="text-slate-400 text-sm">Run comprehensive loyalty programs with point tracking.</p></div>
+            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="sparkles" class="w-8 h-8 text-purple-400 mb-3"></i><h3 class="text-white font-bold">Dynamic Experiences</h3><p class="text-slate-400 text-sm">Create dynamic images and HTML pages for rich interactions.</p></div>
+            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="inbox" class="w-8 h-8 text-teal-400 mb-3"></i><h3 class="text-white font-bold">Multichannel Team Inbox</h3><p class="text-slate-400 text-sm">A multi-channel chat panel for your team to manage communication easily.</p></div>
+            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="zap" class="w-8 h-8 text-orange-400 mb-3"></i><h3 class="text-white font-bold">Automation Builder</h3><p class="text-slate-400 text-sm">Easily Integrate With Shopify, WooCommerce, and 1000+ Tools.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== SERVICES SECTION with Full Descriptions ========== -->
+<section id="services" class="py-24 md:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-12 rv"><span class="text-indigo-600 text-[11px] font-bold uppercase tracking-[0.2em]">What We Offer</span><h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Driven Digital Marketing Services</h2><p class="text-slate-500 max-w-2xl mx-auto mt-3">Result-driven strategies to elevate your brand's online presence and drive measurable growth.</p></div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="rv service-card"><i data-lucide="search" class="w-10 h-10 text-indigo-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">SEO – Search Engine Optimization</h3><p class="text-slate-500 text-sm leading-relaxed">Any business's marketing outcome is heavily influenced by organic SEO. Our SEO services are mostly focused on ensuring that your website's architecture complies with Google's most recent algorithm. We optimize content, establish high-quality backlinks, and use smart content marketing to improve your site's search engine ranking and attract high-quality visitors.</p></div>
+            <div class="rv rvd service-card"><i data-lucide="trending-up" class="w-10 h-10 text-emerald-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">PPC Management Services</h3><p class="text-slate-500 text-sm leading-relaxed">We advise you to use PPC management services to increase and accelerate market penetration. Paid channels generate immediate leads when it comes to launching a new product or making a profitable offer. You can expect to reach a large audience and maximize your investment with our optimized Google search ads, display & shopping ads, and Bing ads.</p></div>
+            <div class="rv service-card"><i data-lucide="shopping-cart" class="w-10 h-10 text-violet-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">eCommerce SEO Services</h3><p class="text-slate-500 text-sm leading-relaxed">Our e-commerce SEO service includes a comprehensive technical SEO analysis of your site. Keyword research, meta tag optimization, traffic analysis, page speed analysis, off-page SEO, setting up product schema, guaranteeing cross device responsiveness, and many more are just a few of our major services.</p></div>
+            <div class="rv rvd service-card"><i data-lucide="file-text" class="w-10 h-10 text-amber-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">Content Marketing Services</h3><p class="text-slate-500 text-sm leading-relaxed">A well-written piece of content raises brand awareness and improves conversion rates. Content marketing services are an excellent method of link building. We compile various forms of content for websites and apps, such as blogs, infographics, videos, and ebooks.</p></div>
+            <div class="rv service-card"><i data-lucide="share-2" class="w-10 h-10 text-rose-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">SMM - Social Media Marketing</h3><p class="text-slate-500 text-sm leading-relaxed">Our complete SEM services approach to creating and publishing material on various social media channels such as Facebook, LinkedIn to garner user attention. We create unique and location-based paid advertisements to ensure quality traffic to your website and app.</p></div>
+            <div class="rv rvd service-card"><i data-lucide="smartphone" class="w-10 h-10 text-sky-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">Mobile App Marketing</h3><p class="text-slate-500 text-sm leading-relaxed">Our all-encompassing approach to mobile app marketing raises brand recognition and encourages additional downloads. We provide excellent app store optimization services and paid ad campaigns to promote your apps on app stores and social media platforms.</p></div>
+            <div class="rv service-card"><i data-lucide="map-pin" class="w-10 h-10 text-teal-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">Local SEO Services</h3><p class="text-slate-500 text-sm leading-relaxed">Our local SEO services help you attract customers to your business and improve your brand's presence in geo-targeted searches. We handle keyword optimization, business directories, Google My Business page, and NAP verification.</p></div>
+            <div class="rv rvd service-card"><i data-lucide="clipboard-list" class="w-10 h-10 text-orange-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">SEO Audit</h3><p class="text-slate-500 text-sm leading-relaxed">An SEO audit can reveal obstacles, why you're not meeting SEO objectives, and techniques competitors are using. Our in-depth audits look at code, site structure, content, identifying opportunities and laying out a plan for the future.</p></div>
+            <div class="rv service-card"><i data-lucide="code" class="w-10 h-10 text-indigo-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">Website Design & Development</h3><p class="text-slate-500 text-sm leading-relaxed">Stunning, user-friendly website design and development. Software solutions and web hosting services to elevate your business with strategy, planning, measuring & proper optimization.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== EXPERTISE OPINION & BLOG SECTION ========== -->
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-12 rv"><span class="text-indigo-600 text-[11px] font-bold uppercase tracking-[0.2em]">Expertise & Insights</span><h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Latest from Our Blog</h2><p class="text-slate-500 mt-2">Expert opinions, industry trends, and actionable insights</p></div>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="rv bg-slate-50 rounded-2xl overflow-hidden hover:shadow-lg transition border border-slate-100"><img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=600" alt="AI Trends" class="w-full h-52 object-cover"><div class="p-6"><p class="text-xs text-indigo-600 font-semibold mb-2">Expertise Opinion • April 2025</p><h3 class="text-xl font-bold text-slate-800 mb-2">The Future of AI in Digital Marketing</h3><p class="text-slate-500 text-sm">How artificial intelligence is reshaping customer engagement and ROI for businesses in 2025.</p><a href="#" class="inline-flex items-center gap-1 text-indigo-600 text-sm font-semibold mt-4 hover:gap-2 transition-all" onclick="alert('Blog content coming soon'); return false;">Read More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a></div></div>
+            <div class="rv rvd bg-slate-50 rounded-2xl overflow-hidden hover:shadow-lg transition border border-slate-100"><img src="https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=600" alt="WhatsApp Marketing" class="w-full h-52 object-cover"><div class="p-6"><p class="text-xs text-indigo-600 font-semibold mb-2">Strategy • April 2025</p><h3 class="text-xl font-bold text-slate-800 mb-2">WhatsApp API: The Ultimate Marketing Channel</h3><p class="text-slate-500 text-sm">Discover how businesses are leveraging WhatsApp Business API to boost sales and customer loyalty.</p><a href="#" class="inline-flex items-center gap-1 text-indigo-600 text-sm font-semibold mt-4 hover:gap-2 transition-all" onclick="alert('Blog content coming soon'); return false;">Read More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a></div></div>
+            <div class="rv bg-slate-50 rounded-2xl overflow-hidden hover:shadow-lg transition border border-slate-100"><img src="https://images.pexels.com/photos/4962011/pexels-photo-4962011.jpeg?auto=compress&cs=tinysrgb&w=600" alt="SEO Trends" class="w-full h-52 object-cover"><div class="p-6"><p class="text-xs text-indigo-600 font-semibold mb-2">SEO Insights • March 2025</p><h3 class="text-xl font-bold text-slate-800 mb-2">2025 SEO Trends: What's Working Now</h3><p class="text-slate-500 text-sm">From EEAT to AI overviews, learn the latest SEO strategies to dominate search rankings.</p><a href="#" class="inline-flex items-center gap-1 text-indigo-600 text-sm font-semibold mt-4 hover:gap-2 transition-all" onclick="alert('Blog content coming soon'); return false;">Read More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a></div></div>
+        </div>
+        <div class="text-center mt-10"><a href="#" class="inline-flex items-center gap-2 text-indigo-600 font-semibold hover:gap-3 transition-all" onclick="alert('More blogs coming soon'); return false;">View All Articles <i data-lucide="arrow-right" class="w-4 h-4"></i></a></div>
+    </div>
+</section>
+
+<!-- ========== ABOUT US ========== -->
+<section id="about" class="py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="grid lg:grid-cols-2 gap-14 items-center">
+            <div class="rv"><span class="text-indigo-600 text-[11px] font-bold uppercase tracking-[0.2em]">About Us</span><h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 leading-tight">Full-Service Digital Marketing Agency</h2><p class="text-slate-600 mt-5 leading-relaxed">Digital Inventa combines creativity, modern technology, and result-driven strategies to elevate brands to the next level. We specialize in Whatsapp API development, AI Solutions, Digital Transformation, CRM Auto Messaging, Purified Lead Collection, Data Driven Marketing, brand development, and software development.</p><p class="text-slate-600 mt-4">Since our inception in 2011, we have gained over a decade of experience working with renowned companies across the globe.</p><div class="grid grid-cols-2 gap-4 mt-8"><div class="bg-white rounded-xl p-4"><div class="text-2xl font-black text-indigo-600">13+</div><div class="text-slate-500 text-sm">Years Experience</div></div><div class="bg-white rounded-xl p-4"><div class="text-2xl font-black text-indigo-600">500+</div><div class="text-slate-500 text-sm">Projects Delivered</div></div></div></div>
+            <div class="rv rvd relative"><div class="rounded-3xl overflow-hidden shadow-2xl"><img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Digital Inventa Team" class="w-full h-[420px] object-cover"></div><div class="absolute -bottom-5 -left-5 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-xl"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-indigo-100"><i data-lucide="zap" class="w-5 h-5 text-indigo-600 m-2.5"></i></div><div><div class="font-bold">Data-Driven</div><div class="text-xs">Result-oriented strategies</div></div></div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== TESTIMONIALS SECTION ========== -->
+<section class="py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-12 rv"><span class="text-indigo-600 text-[11px] font-bold uppercase tracking-[0.2em]">Testimonials</span><h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">What Our Clients Say</h2><p class="text-slate-500 mt-2">Real success stories from businesses we've helped grow</p></div>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="rv bg-white rounded-2xl p-7 shadow-sm border border-slate-100"><div class="flex gap-0.5 mb-4"><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i></div><p class="text-slate-600 text-sm mb-5">"Digital Inventa transformed our online presence. Their SEO strategy increased our organic traffic by 200% in just 4 months. Highly recommended!"</p><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center"><span class="font-bold text-indigo-600">MR</span></div><div><h4 class="font-bold text-slate-800">Mahfuz Rahman</h4><p class="text-xs text-slate-500">CEO, BFC</p></div></div></div>
+            <div class="rv rvd bg-white rounded-2xl p-7 shadow-sm border border-slate-100"><div class="flex gap-0.5 mb-4"><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i></div><p class="text-slate-600 text-sm mb-5">"The WhatsApp API solution they built for us revolutionized customer support. Response time dropped by 85%. Absolutely game-changing!"</p><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center"><span class="font-bold text-emerald-600">SI</span></div><div><h4 class="font-bold text-slate-800">Sharmin Islam</h4><p class="text-xs text-slate-500">Marketing Director, Axiata</p></div></div></div>
+            <div class="rv bg-white rounded-2xl p-7 shadow-sm border border-slate-100"><div class="flex gap-0.5 mb-4"><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i></div><p class="text-slate-600 text-sm mb-5">"Their team's expertise in PPC and social media marketing helped us achieve a 3x ROI. Professional, data-driven, and results-oriented."</p><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-violet-100 flex items-center justify-center"><span class="font-bold text-violet-600">TK</span></div><div><h4 class="font-bold text-slate-800">Tanvir Khan</h4><p class="text-xs text-slate-500">Founder, Digitel</p></div></div></div>
         </div>
     </div>
 </section>
@@ -436,147 +549,6 @@
                 <div class="partner-slide" aria-hidden="true"><img src="partners/7.png" alt="" class="partner-logo"></div>
                 <div class="partner-slide" aria-hidden="true"><img src="partners/8.png" alt="" class="partner-logo"></div>
                 <div class="partner-slide" aria-hidden="true"><img src="partners/9.png" alt="" class="partner-logo"></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ========== TRUSTED BY US SECTION ========== -->
-<section class="py-16 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 md:px-8">
-        <div class="text-center mb-10 rv">
-            <span class="text-indigo-600 text-[11px] font-bold uppercase tracking-[0.2em]">Trusted By Us</span>
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Brands We Work With</h2>
-            <p class="text-slate-500 max-w-2xl mx-auto mt-3">A curated network of partners and brands we proudly support across strategy, growth, and digital execution.</p>
-        </div>
-        <div class="trusted-grid rv">
-            <div class="trusted-logo-card"><img src="partners/1.png" alt="Trusted brand 1" class="trusted-logo"></div>
-            <div class="trusted-logo-card"><img src="partners/2.jpg" alt="Trusted brand 2" class="trusted-logo"></div>
-            <div class="trusted-logo-card"><img src="partners/3.webp" alt="Trusted brand 3" class="trusted-logo"></div>
-            <div class="trusted-logo-card"><img src="partners/4.png" alt="Trusted brand 4" class="trusted-logo"></div>
-            <div class="trusted-logo-card"><img src="partners/5.png" alt="Trusted brand 5" class="trusted-logo"></div>
-            <div class="trusted-logo-card"><img src="partners/6.png" alt="Trusted brand 6" class="trusted-logo"></div>
-            <div class="trusted-logo-card"><img src="partners/7.png" alt="Trusted brand 7" class="trusted-logo"></div>
-            <div class="trusted-logo-card"><img src="partners/8.png" alt="Trusted brand 8" class="trusted-logo"></div>
-            <div class="trusted-logo-card"><img src="partners/9.png" alt="Trusted brand 9" class="trusted-logo"></div>
-        </div>
-    </div>
-</section>
-
-<!-- ========== SERVICES SECTION with Full Descriptions ========== -->
-<section id="services" class="py-24 md:py-28 bg-white">
-    <div class="max-w-7xl mx-auto px-6 md:px-8">
-        <div class="text-center mb-12 rv"><span class="text-indigo-600 text-[11px] font-bold uppercase tracking-[0.2em]">What We Offer</span><h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Driven Digital Marketing Services</h2><p class="text-slate-500 max-w-2xl mx-auto mt-3">Result-driven strategies to elevate your brand's online presence and drive measurable growth.</p></div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="rv service-card"><i data-lucide="search" class="w-10 h-10 text-indigo-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">SEO – Search Engine Optimization</h3><p class="text-slate-500 text-sm leading-relaxed">Any business's marketing outcome is heavily influenced by organic SEO. Our SEO services are mostly focused on ensuring that your website's architecture complies with Google's most recent algorithm. We optimize content, establish high-quality backlinks, and use smart content marketing to improve your site's search engine ranking and attract high-quality visitors.</p></div>
-            <div class="rv rvd service-card"><i data-lucide="trending-up" class="w-10 h-10 text-emerald-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">PPC Management Services</h3><p class="text-slate-500 text-sm leading-relaxed">We advise you to use PPC management services to increase and accelerate market penetration. Paid channels generate immediate leads when it comes to launching a new product or making a profitable offer. You can expect to reach a large audience and maximize your investment with our optimized Google search ads, display & shopping ads, and Bing ads.</p></div>
-            <div class="rv service-card"><i data-lucide="shopping-cart" class="w-10 h-10 text-violet-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">eCommerce SEO Services</h3><p class="text-slate-500 text-sm leading-relaxed">Our e-commerce SEO service includes a comprehensive technical SEO analysis of your site. Keyword research, meta tag optimization, traffic analysis, page speed analysis, off-page SEO, setting up product schema, guaranteeing cross device responsiveness, and many more are just a few of our major services.</p></div>
-            <div class="rv rvd service-card"><i data-lucide="file-text" class="w-10 h-10 text-amber-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">Content Marketing Services</h3><p class="text-slate-500 text-sm leading-relaxed">A well-written piece of content raises brand awareness and improves conversion rates. Content marketing services are an excellent method of link building. We compile various forms of content for websites and apps, such as blogs, infographics, videos, and ebooks.</p></div>
-            <div class="rv service-card"><i data-lucide="share-2" class="w-10 h-10 text-rose-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">SMM - Social Media Marketing</h3><p class="text-slate-500 text-sm leading-relaxed">Our complete SEM services approach to creating and publishing material on various social media channels such as Facebook, LinkedIn to garner user attention. We create unique and location-based paid advertisements to ensure quality traffic to your website and app.</p></div>
-            <div class="rv rvd service-card"><i data-lucide="smartphone" class="w-10 h-10 text-sky-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">Mobile App Marketing</h3><p class="text-slate-500 text-sm leading-relaxed">Our all-encompassing approach to mobile app marketing raises brand recognition and encourages additional downloads. We provide excellent app store optimization services and paid ad campaigns to promote your apps on app stores and social media platforms.</p></div>
-            <div class="rv service-card"><i data-lucide="map-pin" class="w-10 h-10 text-teal-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">Local SEO Services</h3><p class="text-slate-500 text-sm leading-relaxed">Our local SEO services help you attract customers to your business and improve your brand's presence in geo-targeted searches. We handle keyword optimization, business directories, Google My Business page, and NAP verification.</p></div>
-            <div class="rv rvd service-card"><i data-lucide="clipboard-list" class="w-10 h-10 text-orange-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">SEO Audit</h3><p class="text-slate-500 text-sm leading-relaxed">An SEO audit can reveal obstacles, why you're not meeting SEO objectives, and techniques competitors are using. Our in-depth audits look at code, site structure, content, identifying opportunities and laying out a plan for the future.</p></div>
-            <div class="rv service-card"><i data-lucide="code" class="w-10 h-10 text-indigo-500 mb-4"></i><h3 class="text-xl font-bold text-slate-800 mb-2">Website Design & Development</h3><p class="text-slate-500 text-sm leading-relaxed">Stunning, user-friendly website design and development. Software solutions and web hosting services to elevate your business with strategy, planning, measuring & proper optimization.</p></div>
-        </div>
-    </div>
-</section>
-
-<!-- ========== TESTIMONIALS SECTION ========== -->
-<section class="py-24 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 md:px-8">
-        <div class="text-center mb-12 rv"><span class="text-indigo-600 text-[11px] font-bold uppercase tracking-[0.2em]">Testimonials</span><h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">What Our Clients Say</h2><p class="text-slate-500 mt-2">Real success stories from businesses we've helped grow</p></div>
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="rv bg-white rounded-2xl p-7 shadow-sm border border-slate-100"><div class="flex gap-0.5 mb-4"><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i></div><p class="text-slate-600 text-sm mb-5">"Digital Inventa transformed our online presence. Their SEO strategy increased our organic traffic by 200% in just 4 months. Highly recommended!"</p><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center"><span class="font-bold text-indigo-600">MR</span></div><div><h4 class="font-bold text-slate-800">Mahfuz Rahman</h4><p class="text-xs text-slate-500">CEO, BFC</p></div></div></div>
-            <div class="rv rvd bg-white rounded-2xl p-7 shadow-sm border border-slate-100"><div class="flex gap-0.5 mb-4"><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i></div><p class="text-slate-600 text-sm mb-5">"The WhatsApp API solution they built for us revolutionized customer support. Response time dropped by 85%. Absolutely game-changing!"</p><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center"><span class="font-bold text-emerald-600">SI</span></div><div><h4 class="font-bold text-slate-800">Sharmin Islam</h4><p class="text-xs text-slate-500">Marketing Director, Axiata</p></div></div></div>
-            <div class="rv bg-white rounded-2xl p-7 shadow-sm border border-slate-100"><div class="flex gap-0.5 mb-4"><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i><i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i></div><p class="text-slate-600 text-sm mb-5">"Their team's expertise in PPC and social media marketing helped us achieve a 3x ROI. Professional, data-driven, and results-oriented."</p><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-violet-100 flex items-center justify-center"><span class="font-bold text-violet-600">TK</span></div><div><h4 class="font-bold text-slate-800">Tanvir Khan</h4><p class="text-xs text-slate-500">Founder, Digitel</p></div></div></div>
-        </div>
-    </div>
-</section>
-
-<!-- ========== AI AUTOMATION FEATURES SECTION (Expanded) ========== -->
-<section class="py-24 bg-gradient-to-br from-slate-900 to-slate-800">
-    <div class="max-w-7xl mx-auto px-6 md:px-8">
-        <div class="text-center mb-12 rv"><span class="text-indigo-300 text-[11px] font-bold uppercase tracking-[0.2em]">AI Automation Platform</span><h2 class="text-white text-3xl md:text-4xl font-bold">Powerful Features for Modern Business</h2><p class="text-slate-300 mt-3 max-w-2xl mx-auto">Complete ecosystem for conversational AI, CRM, and marketing automation</p></div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="message-circle" class="w-8 h-8 text-emerald-400 mb-3"></i><h3 class="text-white font-bold">WhatsApp API Platform</h3><p class="text-slate-400 text-sm">Send & receive messages via Official WhatsApp APIs and Webhooks.</p></div>
-            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="facebook" class="w-8 h-8 text-blue-400 mb-3"></i><h3 class="text-white font-bold">Facebook Integration</h3><p class="text-slate-400 text-sm">Integrate Facebook Messenger for seamless customer communication.</p></div>
-            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="instagram" class="w-8 h-8 text-pink-400 mb-3"></i><h3 class="text-white font-bold">Instagram Integration</h3><p class="text-slate-400 text-sm">Manage Instagram messages and interactions efficiently.</p></div>
-            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="users" class="w-8 h-8 text-indigo-400 mb-3"></i><h3 class="text-white font-bold">Intelligent CRM</h3><p class="text-slate-400 text-sm">Our In-Built CRM enables you to add various tags & attributes to customers.</p></div>
-            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="git-branch" class="w-8 h-8 text-violet-400 mb-3"></i><h3 class="text-white font-bold">Visual Bot Builder</h3><p class="text-slate-400 text-sm">Create Bots Easily Using Our Drag & Drop Bot Builder.</p></div>
-            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="calendar" class="w-8 h-8 text-amber-400 mb-3"></i><h3 class="text-white font-bold">Calendar Bot</h3><p class="text-slate-400 text-sm">Complete appointment booking ecosystem with smart scheduling.</p></div>
-            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="ticket" class="w-8 h-8 text-rose-400 mb-3"></i><h3 class="text-white font-bold">Tickets Bot</h3><p class="text-slate-400 text-sm">Comprehensive event ticketing system with QR code support.</p></div>
-            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="qrcode" class="w-8 h-8 text-cyan-400 mb-3"></i><h3 class="text-white font-bold">Dynamic QR Bot</h3><p class="text-slate-400 text-sm">Create and manage dynamic QR codes for various campaigns.</p></div>
-            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="gift" class="w-8 h-8 text-yellow-400 mb-3"></i><h3 class="text-white font-bold">Reward Points</h3><p class="text-slate-400 text-sm">Run comprehensive loyalty programs with point tracking.</p></div>
-            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="sparkles" class="w-8 h-8 text-purple-400 mb-3"></i><h3 class="text-white font-bold">Dynamic Experiences</h3><p class="text-slate-400 text-sm">Create dynamic images and HTML pages for rich interactions.</p></div>
-            <div class="rv ai-feature-card rounded-xl p-5"><i data-lucide="inbox" class="w-8 h-8 text-teal-400 mb-3"></i><h3 class="text-white font-bold">Multichannel Team Inbox</h3><p class="text-slate-400 text-sm">A multi-channel chat panel for your team to manage communication easily.</p></div>
-            <div class="rv rvd ai-feature-card rounded-xl p-5"><i data-lucide="zap" class="w-8 h-8 text-orange-400 mb-3"></i><h3 class="text-white font-bold">Automation Builder</h3><p class="text-slate-400 text-sm">Easily Integrate With Shopify, WooCommerce, and 1000+ Tools.</p></div>
-        </div>
-    </div>
-</section>
-
-<!-- ========== EXPERTISE OPINION & BLOG SECTION ========== -->
-<section class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-6 md:px-8">
-        <div class="text-center mb-12 rv"><span class="text-indigo-600 text-[11px] font-bold uppercase tracking-[0.2em]">Expertise & Insights</span><h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Latest from Our Blog</h2><p class="text-slate-500 mt-2">Expert opinions, industry trends, and actionable insights</p></div>
-        <div class="grid md:grid-cols-3 gap-6">
-            <div class="rv bg-slate-50 rounded-2xl overflow-hidden hover:shadow-lg transition border border-slate-100"><img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=600" alt="AI Trends" class="w-full h-52 object-cover"><div class="p-6"><p class="text-xs text-indigo-600 font-semibold mb-2">Expertise Opinion • April 2025</p><h3 class="text-xl font-bold text-slate-800 mb-2">The Future of AI in Digital Marketing</h3><p class="text-slate-500 text-sm">How artificial intelligence is reshaping customer engagement and ROI for businesses in 2025.</p><a href="#" class="inline-flex items-center gap-1 text-indigo-600 text-sm font-semibold mt-4 hover:gap-2 transition-all" onclick="alert('Blog content coming soon'); return false;">Read More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a></div></div>
-            <div class="rv rvd bg-slate-50 rounded-2xl overflow-hidden hover:shadow-lg transition border border-slate-100"><img src="https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=600" alt="WhatsApp Marketing" class="w-full h-52 object-cover"><div class="p-6"><p class="text-xs text-indigo-600 font-semibold mb-2">Strategy • April 2025</p><h3 class="text-xl font-bold text-slate-800 mb-2">WhatsApp API: The Ultimate Marketing Channel</h3><p class="text-slate-500 text-sm">Discover how businesses are leveraging WhatsApp Business API to boost sales and customer loyalty.</p><a href="#" class="inline-flex items-center gap-1 text-indigo-600 text-sm font-semibold mt-4 hover:gap-2 transition-all" onclick="alert('Blog content coming soon'); return false;">Read More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a></div></div>
-            <div class="rv bg-slate-50 rounded-2xl overflow-hidden hover:shadow-lg transition border border-slate-100"><img src="https://images.pexels.com/photos/4962011/pexels-photo-4962011.jpeg?auto=compress&cs=tinysrgb&w=600" alt="SEO Trends" class="w-full h-52 object-cover"><div class="p-6"><p class="text-xs text-indigo-600 font-semibold mb-2">SEO Insights • March 2025</p><h3 class="text-xl font-bold text-slate-800 mb-2">2025 SEO Trends: What's Working Now</h3><p class="text-slate-500 text-sm">From EEAT to AI overviews, learn the latest SEO strategies to dominate search rankings.</p><a href="#" class="inline-flex items-center gap-1 text-indigo-600 text-sm font-semibold mt-4 hover:gap-2 transition-all" onclick="alert('Blog content coming soon'); return false;">Read More <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a></div></div>
-        </div>
-        <div class="text-center mt-10"><a href="#" class="inline-flex items-center gap-2 text-indigo-600 font-semibold hover:gap-3 transition-all" onclick="alert('More blogs coming soon'); return false;">View All Articles <i data-lucide="arrow-right" class="w-4 h-4"></i></a></div>
-    </div>
-</section>
-
-<!-- ========== ABOUT US ========== -->
-<section id="about" class="py-24 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 md:px-8">
-        <div class="grid lg:grid-cols-2 gap-14 items-center">
-            <div class="rv"><span class="text-indigo-600 text-[11px] font-bold uppercase tracking-[0.2em]">About Us</span><h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 leading-tight">Full-Service Digital Marketing Agency</h2><p class="text-slate-600 mt-5 leading-relaxed">Digital Inventa combines creativity, modern technology, and result-driven strategies to elevate brands to the next level. We specialize in Whatsapp API development, AI Solutions, Digital Transformation, CRM Auto Messaging, Purified Lead Collection, Data Driven Marketing, brand development, and software development.</p><p class="text-slate-600 mt-4">Since our inception in 2011, we have gained over a decade of experience working with renowned companies across the globe.</p><div class="grid grid-cols-2 gap-4 mt-8"><div class="bg-white rounded-xl p-4"><div class="text-2xl font-black text-indigo-600">13+</div><div class="text-slate-500 text-sm">Years Experience</div></div><div class="bg-white rounded-xl p-4"><div class="text-2xl font-black text-indigo-600">500+</div><div class="text-slate-500 text-sm">Projects Delivered</div></div></div></div>
-            <div class="rv rvd relative"><div class="rounded-3xl overflow-hidden shadow-2xl"><img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Digital Inventa Team" class="w-full h-[420px] object-cover"></div><div class="absolute -bottom-5 -left-5 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-xl"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-indigo-100"><i data-lucide="zap" class="w-5 h-5 text-indigo-600 m-2.5"></i></div><div><div class="font-bold">Data-Driven</div><div class="text-xs">Result-oriented strategies</div></div></div></div></div>
-        </div>
-    </div>
-</section>
-
-<!-- ========== FAQ SECTION ========== -->
-<section class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-6 md:px-8">
-        <div class="faq-shell">
-            <div class="faq-intro rv">
-                <span class="text-indigo-300 text-[11px] font-bold uppercase tracking-[0.2em]">FAQ</span>
-                <h2 class="text-3xl md:text-4xl font-bold mt-3 leading-tight">Questions teams usually ask before starting with us.</h2>
-                <p class="text-slate-300 mt-4 leading-relaxed">Here are a few common questions about timelines, pricing, collaboration, and the kind of digital solutions we build. Everything below is sample content for now, but it is written to match the services already shown on the page.</p>
-                <div class="mt-8 grid sm:grid-cols-2 gap-4">
-                    <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
-                        <div class="text-2xl font-black text-white">24h</div>
-                        <div class="text-sm text-slate-300 mt-1">Typical first-response time</div>
-                    </div>
-                    <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
-                        <div class="text-2xl font-black text-white">Flexible</div>
-                        <div class="text-sm text-slate-300 mt-1">Project scope and engagement model</div>
-                    </div>
-                </div>
-            </div>
-            <div class="faq-list rv rvd">
-                <details class="faq-item" open>
-                    <summary><span>How long does it usually take to launch a website or marketing project?</span><span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></summary>
-                    <div class="faq-answer">A small landing page or campaign setup can be ready in a few days, while a more complete website, SEO strategy, or automation workflow may take several weeks. Final timing depends on content readiness, approval speed, and how many features are included in the scope.</div>
-                </details>
-                <details class="faq-item">
-                    <summary><span>Do you handle both strategy and full execution?</span><span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></summary>
-                    <div class="faq-answer">Yes. We can support discovery, planning, design, development, campaign setup, and optimization. Some clients need full end-to-end delivery, while others only need help with a specific part such as SEO audits, paid ads, chatbot implementation, or website redesign.</div>
-                </details>
-                <details class="faq-item">
-                    <summary><span>Can you customize AI, WhatsApp, or CRM solutions for our business?</span><span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></summary>
-                    <div class="faq-answer">Absolutely. Our workflow can be tailored around lead capture, customer support, booking flows, internal automation, or sales follow-up. The dummy content here reflects a flexible setup where integrations, messaging logic, and reporting are adapted to your process instead of forcing a one-size-fits-all system.</div>
-                </details>
-                <details class="faq-item">
-                    <summary><span>What do your pricing and engagement models usually look like?</span><span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></summary>
-                    <div class="faq-answer">Pricing is normally based on scope, deliverables, and timeline. We can work on fixed-price projects, monthly retainers, or phased roadmaps. A simple first conversation is usually enough to recommend the most sensible option based on your goals and budget.</div>
-                </details>
-                <details class="faq-item">
-                    <summary><span>Will the website and dashboards work well on mobile devices too?</span><span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></summary>
-                    <div class="faq-answer">Yes. Responsive behavior is part of the build process from the beginning. That includes layout adjustments, readable typography, accessible navigation, and touch-friendly interactions so the experience remains strong across phones, tablets, and desktops.</div>
-                </details>
             </div>
         </div>
     </div>
@@ -642,6 +614,73 @@
                     </div>
                     <button type="submit" class="schedule-submit">Schedule Request <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
                 </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== TRUSTED BY US SECTION ========== -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="text-center mb-14 rv">
+            <span class="text-slate-500 text-[11px] font-bold uppercase tracking-[0.26em]">Trusted By Us</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-3">Brands We Work With</h2>
+            <p class="text-slate-500 max-w-3xl mx-auto mt-3">A growing network of clients and partner brands we support through digital strategy, design, automation, and execution.</p>
+        </div>
+        <div class="trusted-grid rv">
+            <div class="trusted-logo-item"><img src="partners/1.png" alt="Trusted brand 1" class="trusted-logo"></div>
+            <div class="trusted-logo-item"><img src="partners/2.jpg" alt="Trusted brand 2" class="trusted-logo"></div>
+            <div class="trusted-logo-item"><img src="partners/3.webp" alt="Trusted brand 3" class="trusted-logo"></div>
+            <div class="trusted-logo-item"><img src="partners/4.png" alt="Trusted brand 4" class="trusted-logo"></div>
+            <div class="trusted-logo-item"><img src="partners/5.png" alt="Trusted brand 5" class="trusted-logo"></div>
+            <div class="trusted-logo-item"><img src="partners/6.png" alt="Trusted brand 6" class="trusted-logo"></div>
+            <div class="trusted-logo-item"><img src="partners/7.png" alt="Trusted brand 7" class="trusted-logo"></div>
+            <div class="trusted-logo-item"><img src="partners/8.png" alt="Trusted brand 8" class="trusted-logo"></div>
+            <div class="trusted-logo-item"><img src="partners/9.png" alt="Trusted brand 9" class="trusted-logo"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FAQ SECTION ========== -->
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="faq-shell">
+            <div class="faq-intro rv">
+                <span class="text-indigo-300 text-[11px] font-bold uppercase tracking-[0.2em]">FAQ</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 leading-tight">Questions teams usually ask before starting with us.</h2>
+                <p class="text-slate-300 mt-4 leading-relaxed">Here are a few common questions about timelines, pricing, collaboration, and the kind of digital solutions we build. Everything below is sample content for now, but it is written to match the services already shown on the page.</p>
+                <div class="mt-8 grid sm:grid-cols-2 gap-4">
+                    <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+                        <div class="text-2xl font-black text-white">24h</div>
+                        <div class="text-sm text-slate-300 mt-1">Typical first-response time</div>
+                    </div>
+                    <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+                        <div class="text-2xl font-black text-white">Flexible</div>
+                        <div class="text-sm text-slate-300 mt-1">Project scope and engagement model</div>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-list rv rvd">
+                <details class="faq-item" open>
+                    <summary><span>How long does it usually take to launch a website or marketing project?</span><span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></summary>
+                    <div class="faq-answer">A small landing page or campaign setup can be ready in a few days, while a more complete website, SEO strategy, or automation workflow may take several weeks. Final timing depends on content readiness, approval speed, and how many features are included in the scope.</div>
+                </details>
+                <details class="faq-item">
+                    <summary><span>Do you handle both strategy and full execution?</span><span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></summary>
+                    <div class="faq-answer">Yes. We can support discovery, planning, design, development, campaign setup, and optimization. Some clients need full end-to-end delivery, while others only need help with a specific part such as SEO audits, paid ads, chatbot implementation, or website redesign.</div>
+                </details>
+                <details class="faq-item">
+                    <summary><span>Can you customize AI, WhatsApp, or CRM solutions for our business?</span><span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></summary>
+                    <div class="faq-answer">Absolutely. Our workflow can be tailored around lead capture, customer support, booking flows, internal automation, or sales follow-up. The dummy content here reflects a flexible setup where integrations, messaging logic, and reporting are adapted to your process instead of forcing a one-size-fits-all system.</div>
+                </details>
+                <details class="faq-item">
+                    <summary><span>What do your pricing and engagement models usually look like?</span><span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></summary>
+                    <div class="faq-answer">Pricing is normally based on scope, deliverables, and timeline. We can work on fixed-price projects, monthly retainers, or phased roadmaps. A simple first conversation is usually enough to recommend the most sensible option based on your goals and budget.</div>
+                </details>
+                <details class="faq-item">
+                    <summary><span>Will the website and dashboards work well on mobile devices too?</span><span class="faq-icon"><i data-lucide="plus" class="w-4 h-4"></i></span></summary>
+                    <div class="faq-answer">Yes. Responsive behavior is part of the build process from the beginning. That includes layout adjustments, readable typography, accessible navigation, and touch-friendly interactions so the experience remains strong across phones, tablets, and desktops.</div>
+                </details>
             </div>
         </div>
     </div>
